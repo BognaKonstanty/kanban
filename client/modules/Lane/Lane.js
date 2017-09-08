@@ -8,6 +8,9 @@ import styles from './Lane.css';
 class Lane extends Component {
   render() {
     return (
+      <div>
+        <h2>Lane</h2>
+      </div>
     );
   }
 }

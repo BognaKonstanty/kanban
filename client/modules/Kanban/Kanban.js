@@ -8,6 +8,9 @@ import styles from './Kanban.css';
 class Kanban extends Component {
   render() {
     return (
+      <div>
+        <h2>Kanban</h2>
+      </div>
     );
   }
 }

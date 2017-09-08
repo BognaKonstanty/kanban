@@ -1,10 +1,10 @@
 import Lane from '../models/lane';
 import Note from '../models/note';
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 
-export function getSomething(req, res) {
+/*export function getSomething(req, res) {
   return res.status(200).end();
-}
+}*/
 
 export function addLane(req, res) {
   if (!req.body.name) {
