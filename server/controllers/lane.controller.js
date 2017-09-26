@@ -1,6 +1,7 @@
 import Lane from '../models/lane';
 import Note from '../models/note';
 import uuid from 'uuid/v4';
+import mongoose from 'mongoose';
 
 /*export function getSomething(req, res) {
   return res.status(200).end();
@@ -34,13 +35,23 @@ export function getLanes(req, res) {
 }
 
 export function deleteLane(req, res) {
+  var notesToRemove = [];
+
   Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
     if (err) {
       res.status(500).send(err);
     }
 
-    lane.remove(() => {
-      res.status(200).end();
+    for (var i = 0; i < lane.notes.length; i++) {
+      notesToRemove.push(mongoose.Types.ObjectId(lane.notes[i]));
+    }
+
+    console.log(notesToRemove)
+
+    Note.remove({ _id: { $in: notesToRemove} }).exec((err) => {
+      lane.remove(() => {
+        res.status(200).end();
+      });
     });
   });
 }

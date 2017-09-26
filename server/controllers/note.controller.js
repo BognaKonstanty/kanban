@@ -21,6 +21,7 @@ export function addNote(req, res) {
     }
     Lane.findOne({id: req.params.laneId})
       .then(lane => {
+        console.log(saved);
         lane.notes.push(saved);
         return lane.save()
       })
@@ -57,6 +58,5 @@ export function deleteNote(req, res) {
       .then(() => {
         res.json(saved);
       });
-  });
   });
 }
