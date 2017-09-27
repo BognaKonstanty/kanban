@@ -1,6 +1,7 @@
 import Lane from '../models/lane';
 import Note from '../models/note';
 import uuid from 'uuid/v4';
+import mongoose from 'mongoose';
 
 /*export function getSomething(req, res) {
   return res.status(200).end();
@@ -33,7 +34,7 @@ export function getLanes(req, res) {
 	});
 }
 
-export function deleteLane(req, res) {
+/*export function deleteLane(req, res) {
   Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
     if (err) {
       res.status(500).send(err);
@@ -43,4 +44,48 @@ export function deleteLane(req, res) {
       res.status(200).end();
     });
   });
+}*/
+
+export function deleteLane(req, res) {
+  var notesToRemove = [];
+
+  Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+
+    if (lane.notes.length) {
+      for (var i = 0; i < lane.notes.length; i++) {
+        notesToRemove.push(mongoose.Types.ObjectId(lane.notes[i]));
+      }
+
+
+      Note.remove({ _id: { $in: notesToRemove} }).exec((err) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        lane.remove(() => {
+          res.status(200).end();
+        });
+      });
+    } else {
+      lane.remove(() => {
+          res.status(200).end();
+        });
+    }
+  });
 }
+
+  export function editNameLine(req, res) {
+    if (!req.body.name) {
+    res.status(403).end();
+    }
+
+    Line.findByIdAndUpdate(id: req.params.laneId, { $set: {name: req.body.name}}).exec((err, lane) => {
+      if (err) {
+        res.status(500).send(err)
+      }
+      res.send(line);
+    });
+  }
+

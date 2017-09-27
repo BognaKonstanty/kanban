@@ -39,24 +39,37 @@ export function getNotes(req, res) {
   });
 };
 
+
 export function deleteNote(req, res) {
-  Note.findOne({ id: req.params.noteId }).exec((err, note) => {
-    if (err) {
-      res.status(500).send(err);
+   Note.findOne({ id: req.params.noteId }).exec((err, note) => {
+     if (err) {
+       res.status(500).send(err);
+     }
+ 
+     note.remove(() => {
+       res.status(200).end();
+     });
+ 
+     Lane.findOne({id: req.params.laneId})
+       .then(lane => {
+         lane.notes.remove(saved);
+         return lane.save()
+       })
+       .then(() => {
+          res.json(saved);
+        });
+    });
+}
+
+ export function editNote(req, res) {
+    if (!req.body.task) {
+    res.status(403).end();
     }
 
-    note.remove(() => {
-      res.status(200).end();
-    });
-
-    Lane.findOne({id: req.params.laneId})
-      .then(lane => {
-        lane.notes.remove(saved);
-        return lane.save()
-      })
-      .then(() => {
-        res.json(saved);
-      });
-  });
-  });
-}
+    Note.findByIdAndUpdate(id: req.params.noteId, { $set: {task: req.body.task}}).exec((err, note) => {
+      if (err) {
+        res.status(500).send(err)
+      }
+      res.send(note);
+    }); 
+ }   
