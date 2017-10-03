@@ -76,7 +76,7 @@ export function deleteLane(req, res) {
   });
 }
 
-  export function editNameLine(req, res) {
+  export function updateLane(req, res) {
     if (!req.body.name) {
     res.status(403).end();
     }

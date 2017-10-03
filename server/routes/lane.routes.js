@@ -15,6 +15,6 @@ router.route('/lanes/:laneId').delete(LaneController.deleteLane);
 
 router.use('/lanes/:laneId/', noteRouter);
 
-router.route('/lanes/:laneId').put(LaneController.editNameLine);
+router.route('/lanes/:laneId').put(LaneController.updateLane);
 
 export default router;

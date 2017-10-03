@@ -6,9 +6,9 @@ const initialState = {};
 
 const LaneReducer = (state = initialState, action) => {
   switch (action.type) {
-  	case: CREATE_LANE:
+  	case CREATE_LANE:
   		return [..state, action.lane];
-  	case: UPDATE_LANE:
+  	case UPDATE_LANE:
   		return state.map((line) => {
   			if(line.id === action.id) {
   				return Object.assign({}, lane, action.updatedLane);
@@ -23,3 +23,4 @@ const LaneReducer = (state = initialState, action) => {
 };
 
 export default LaneReducer;
+
