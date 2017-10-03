@@ -7,9 +7,20 @@ import styles from './Lane.css';
 
 class Lane extends Component {
   render() {
+    const {lane, laneNotes, ... props} =this.props;
+    const laneId = lane.id;
     return (
-      <div>
-        <h2>Lane</h2>
+      <div {...props}>
+        <div className={styles.LaneHeader} onClick={() => props.updateLane({id: laneId, editing: true})}>
+        <div className={styles.LaneAddNote}>
+          <button onClick={props.addNote.bind(this, laneId)}>+</button>
+        </div>
+        <h4>{lane.name}</h4>
+        <div className={styles.LaneDelete}>
+          <button onClick={props.deleteLane.bind(this, lane)}>x</button>
+        </div>
+        </div>
+        <NotesContainer notes={laneNotes} />
       </div>
     );
   }
@@ -24,9 +35,13 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 Lane.propTypes = {
+  lane: PropTypes.object,
+  laneNotes: PropTypes.array
 };
 
-export default connect(
+/*export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Lane);
+)(Lane);*/
+
+export default Lane;
