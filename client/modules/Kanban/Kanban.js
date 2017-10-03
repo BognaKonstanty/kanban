@@ -5,7 +5,6 @@ import Lanes from '../Lane/Lanes';
 import { createLane } from '../Lane/LaneActions';
 
 // Import Style
-import styles from '../Lane/Lane.css';
 import styles from './Kanban.css';
 
 class Kanban extends React.Component {

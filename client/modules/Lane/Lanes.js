@@ -4,12 +4,12 @@ import Lane from './Lane.js';
 const Lanes = ({lanes}) => {
 	return (
 		<div className="lanes">{lanes.map(lane =>
-			<Lane  className="lane" key={lane.id} lane={lane} />>
-			)}</div>
-		);
+			<Lane  className="lane" key={lane.id} lane={lane} />
+		)}</div>
+	);
 };
 
-Lanes.propTypes.array={
+Lanes.propTypes = {
 	lanes: PropTypes.array
 };
 
