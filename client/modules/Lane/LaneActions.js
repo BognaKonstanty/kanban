@@ -4,8 +4,8 @@ export const UPDATE_LANE = 'UPDATE_LANE';
 export const CREATE_LANES = 'CREATE_LANES';
 
 import uuid from 'uuid';
-import callApi from '../../../util/apiCaller';
-import { lanes } from '../../../util/schema';
+import callApi from '../../util/apiCaller';
+import { lanes } from '../../util/schema';
 import { normalize } from 'normalizr';
 
 

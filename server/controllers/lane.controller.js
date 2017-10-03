@@ -81,11 +81,11 @@ export function deleteLane(req, res) {
     res.status(403).end();
     }
 
-    Line.findByIdAndUpdate(id: req.params.laneId, { $set: {name: req.body.name}}).exec((err, lane) => {
+    Lane.update({id: req.params.laneId}, { $set: {name: req.body.name}}, (err, lane) => {
       if (err) {
         res.status(500).send(err)
       }
-      res.send(line);
+      res.send(lane);
     });
   }
 
