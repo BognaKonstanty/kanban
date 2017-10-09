@@ -4,8 +4,8 @@ export const UPDATE_LANE = 'UPDATE_LANE';
 export const CREATE_LANES = 'CREATE_LANES';
 
 import uuid from 'uuid';
-import callApi from '../../../util/apiCaller';
-import { lanes } from '../../../util/schema';
+import callApi from '../../util/apiCaller';
+import { lanes } from '../../util/schema';
 import { normalize } from 'normalizr';
 
 
@@ -38,8 +38,10 @@ export function fetchLanes() {
   return (dispatch) => {
     return callApi('lanes').then(res => {
       const normalized = normalize(res.lanes, lanes);
-      const {lanes} = normalized.entities;
+      const { lanes, notes } = normalized.entities;
+
       dispatch(createLanes(lanes));
+      dispatch(createNotes(notes));
     });
   };
 }
@@ -50,3 +52,4 @@ export function createLanes(lanes) {
     lanes
   };
 };
+

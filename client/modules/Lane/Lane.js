@@ -15,7 +15,10 @@ class Lane extends Component {
         <div className={styles.LaneAddNote}>
           <button onClick={props.addNote.bind(this, laneId)}>+</button>
         </div>
-        <h4>{lane.name}</h4>
+        <Edit className={styles.LaneName} editing={lane.editing}
+          value={lane.name}
+          onEdit={name => props.updateLane({id: laneId, name, editing: false})}
+/>
         <div className={styles.LaneDelete}>
           <button onClick={props.deleteLane.bind(this, lane)}>x</button>
         </div>

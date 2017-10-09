@@ -66,7 +66,7 @@ export function deleteNote(req, res) {
     res.status(403).end();
     }
 
-    Note.findByIdAndUpdate(id: req.params.noteId, { $set: {task: req.body.task}}).exec((err, note) => {
+   Note.update({id: req.params.noteId}, { $set: {task: req.body.task}}, (err, note) => {
       if (err) {
         res.status(500).send(err)
       }

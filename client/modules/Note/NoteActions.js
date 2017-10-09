@@ -27,3 +27,10 @@ export function updateNote(updatedNote) {
 		...updatedNote
 	};
 };
+
+export function createNotes(notes) {
+  return {
+    type: CREATE_NOTES,
+    notes
+  };
+}

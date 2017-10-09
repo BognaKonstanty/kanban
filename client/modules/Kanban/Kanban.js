@@ -5,7 +5,6 @@ import Lanes from '../Lane/Lanes';
 import { createLane } from '../Lane/LaneActions';
 
 // Import Style
-import styles from '../Lane/Lane.css';
 import styles from './Kanban.css';
 
 class Kanban extends React.Component {
@@ -14,7 +13,7 @@ class Kanban extends React.Component {
 
     return (
       <div>
-        <button className={styles.AddLane} 
+        <button className="add-lane"
         onClick={() => createLane({
           name: 'New lane'
         })}
