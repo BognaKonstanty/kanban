@@ -11,6 +11,8 @@ class Kanban extends React.Component {
   render() {
     const {lanes, createLane}= this.props;
 
+    let lanesResult = lanes ? lanes : [];
+
     return (
       <div>
         <button className="add-lane"
@@ -18,7 +20,7 @@ class Kanban extends React.Component {
           name: 'New lane'
         })}
         >Add lane</button>
-        <Lanes lanes={lanes}/>
+        <Lanes lanes={lanesResult}/>
       </div>
     );
   }
