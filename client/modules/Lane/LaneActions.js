@@ -10,29 +10,38 @@ import { normalize } from 'normalizr';
 
 
 export function createLane(lane) {
-  return {
- 	type: CREATE_LANE,
- 	lane: {
- 		id: uuid.v4(),
- 		notes: lane.notes || [],
- 		...lane
- 	}
+  return (dispatch) => {
+    return callApi('lanes', 'post', lane).then(res => {
+      dispatch(createLanes({
+        type: CREATE_LANE,
+        lane: res
+      }));
+    });
   };
 };
 
 export function deleteLane(id) {
-	return {
-		type: DELETE_LANE,
-		id
-	};
-};
+  return dispatch => {
+    return callApi(`lanes/${id}`, 'delete').then(res => {
+      dispatch({
+        type: DELETE_LANE,
+        id
+      })
+    })
+  }
+}
 
-export function updateLane (updatedLane) {
-	return {
-		type: UPDATE_LANE,
-		...updatedLane
-	};
-};
+
+export function updateLane(lane) {
+  return dispatch => {
+    return callApi(`lanes/${laneId}`, 'put', lane).then(res => {
+      dispatch({
+        type: UPDATE_LANE,
+        lane
+      })
+    })
+  }
+}
 
 export function fetchLanes() {
   return (dispatch) => {
