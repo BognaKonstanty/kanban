@@ -9,13 +9,13 @@ import { lanes } from '../../util/schema';
 import { normalize } from 'normalizr';
 
 
-export function createLane(lane) {
-  return (dispatch) => {
+export function createLane(dispatch) {
+  return (lane) => {
     return callApi('lanes', 'post', lane).then(res => {
-      dispatch(createLanes({
+      dispatch({
         type: CREATE_LANE,
         lane: res
-      }));
+      });
     });
   };
 };
