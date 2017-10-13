@@ -25,11 +25,13 @@ class Kanban extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  lanes: state.lanes
+  //lanes: state.lanes
+  lanes: (() => state.lanes ? Object.values(state.lanes) : [])()
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createLane
+  //createLane
+  createLane: createLane(dispatch)
 });
 
 
