@@ -7,7 +7,7 @@ import styles from './Lane.css';
 
 class Lane extends Component {
   render() {
-    const {lane, laneNotes, ... props} =this.props;
+    const {lane, laneNotes, ...props} =this.props;
     const laneId = lane.id;
     return (
       <div {...props}>
