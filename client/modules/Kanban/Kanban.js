@@ -10,7 +10,6 @@ import styles from './Kanban.css';
 class Kanban extends React.Component {
   render() {
     const {lanes, createLane}= this.props;
-    let lanesResult = lanes ? lanes : [];
     return (
       <div>
         <button className="add-lane"
@@ -18,19 +17,21 @@ class Kanban extends React.Component {
           name: 'New lane'
         })}
         >Add lane</button>
-        <Lanes lanes={lanesResult}/>
+        <Lanes lanes={lanes}/>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  //lanes: state.lanes
-  lanes: (() => state.lanes ? Object.values(state.lanes) : [])()
-});
+const mapStateToProps = (state) => {
+  return {
+    lanes: (() => {
+      return state.LaneReducer ? Object.values(state.LaneReducer) : []
+    })()
+  }
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  //createLane
   createLane: createLane(dispatch)
 });
 
