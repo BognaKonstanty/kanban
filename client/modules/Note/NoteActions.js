@@ -1,16 +1,19 @@
 export const CREATE_NOTE = 'CREATE_NOTE';
 export const DELETE_NOTE = 'DELETE_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
+export const CREATE_NOTES = 'CREATE_NOTES';
 
 import uuid from 'uuid';
 
+import callApi from '../../util/apiCaller';
+
 export function createNote(note) {
   return (dispatch) => {
-    return callApi(`lanes/${laneId}/notes`, 'post', note).then(res => {
+    return callApi(`lanes/${note}/notes`, 'post', {"task": 'test'}).then(res => {
       dispatch({
         type: CREATE_NOTE,
         note: res
-      });
+      });      
     });
   };
 };
@@ -26,14 +29,6 @@ export function deleteNote(id) {
     })
   }
 }
-
-export function updateNote(updatedNote) {
-	return {
-		type: UPDATE_NOTE,
-		...updatedNote
-	};
-};
-
 
 export function updateNote(note) {
   return dispatch => {

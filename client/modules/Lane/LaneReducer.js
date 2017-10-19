@@ -11,7 +11,7 @@ const LaneReducer = (state = initialState, action) => {
     case CREATE_LANES:
       return { ...action.lanes }
     case UPDATE_LANE:
-      return { ...state, [action.updatedLane.id]: action.updatedLane };
+      return { ...state, [action.lane.id]: action.lane };
     case DELETE_LANE:
       return _.omit(state, action.id);
     default:

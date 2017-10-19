@@ -2,8 +2,8 @@ import React, {PropTypes} from 'react';
 import Note from './Note';
 
 
-const Notes= ({notes}) => {
-	return (<ul className="notes">{notes.map((note) => 
+const Notes = ({notes}) => {
+	return (<ul className="notes">{notes ? notes.map((note) => 
 		<Note
   			id={note.id}
   			key={note.id}
@@ -15,8 +15,8 @@ const Notes= ({notes}) => {
 		    	onEdit={() => onEdit(note.id)}
 		    	onDelete={() => onDelete(note.id)}
 		    />
-		</Note>
-	)}	
+		</Note>		
+	) : null }	
 	</ul>);
 };
 
