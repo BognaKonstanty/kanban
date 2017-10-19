@@ -5,29 +5,13 @@ import _ from 'lodash';
 const initialState = {};
 
 const LaneReducer = (state = initialState, action) => {
-  /*switch (action.type) {
-  	case CREATE_LANE:
-  		return [..state, action.lane];
-  	case UPDATE_LANE:
-  		return state.map((line) => {
-  			if(line.id === action.id) {
-  				return Object.assign({}, lane, action.updatedLane);
-  			}
-  			return lane;	
-  		});
-  	case DELETE_LANE:
-  		return state.filter((lane) => lane.id !== action.id);	
-    default:
-      return state;
-  }*/
-
   switch (action.type) {
     case CREATE_LANE:
-      return { ...state, [action.lane.id]: action.lane };
+      return { ...state, [action.lane.lane.id]: action.lane.lane };
     case CREATE_LANES:
       return { ...action.lanes }
     case UPDATE_LANE:
-      return { ...state, [action.updatedLane.id]: action.updatedLane };
+      return { ...state, [action.lane.id]: action.lane };
     case DELETE_LANE:
       return _.omit(state, action.id);
     default:

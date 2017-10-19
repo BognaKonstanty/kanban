@@ -9,8 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
-	...laneActions,
+const mapDispatchToProps = {
+  ...laneActions,
   createNote
 };
 

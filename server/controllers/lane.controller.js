@@ -48,44 +48,44 @@ export function getLanes(req, res) {
 
 export function deleteLane(req, res) {
   var notesToRemove = [];
-
-  Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
-    if (err) {
+  Lane.findOne({ id: req.params.laneId }, (err, lane) => {
+    if (err) {      
       res.status(500).send(err);
     }
 
-    if (lane.notes.length) {
-      for (var i = 0; i < lane.notes.length; i++) {
-        notesToRemove.push(mongoose.Types.ObjectId(lane.notes[i]));
-      }
 
-
-      Note.remove({ _id: { $in: notesToRemove} }).exec((err) => {
-        if (err) {
-          res.status(500).send(err);
+    if (lane) {
+      if (lane.notes.length) {
+        for (var i = 0; i < lane.notes.length; i++) {
+          notesToRemove.push(mongoose.Types.ObjectId(lane.notes[i]));
         }
-        lane.remove(() => {
-          res.status(200).end();
+
+
+        Note.remove({ _id: { $in: notesToRemove} }).exec((err) => {
+          if (err) {
+            return res.status(500).send(err);
+          }          
         });
-      });
-    } else {
-      lane.remove(() => {
-          res.status(200).end();
-        });
+      } 
+
+      lane.remove(() => res.status(200).end());
+    } else {    
+      return res.status(404).end();
     }
   });
 }
 
   export function updateLane(req, res) {
     if (!req.body.name) {
-    res.status(403).end();
+      return res.status(403).end();
     }
 
     Lane.update({id: req.params.laneId}, { $set: {name: req.body.name}}, (err, lane) => {
       if (err) {
-        res.status(500).send(err)
+        return res.status(500).send(err)
       }
-      res.send(lane);
+      
+      return res.send(lane);
     });
   }
 

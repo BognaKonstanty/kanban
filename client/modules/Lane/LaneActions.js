@@ -22,12 +22,12 @@ export function createLane(dispatch) {
 
 
 
-export function deleteLane(id) {
+export function deleteLane(lane) {
   return dispatch => {
-    return callApi(`lanes/${id}`, 'delete').then(res => {
+    return callApi(`lanes/${lane.id}`, 'delete').then(res => {
       dispatch({
         type: DELETE_LANE,
-        id
+        id: lane.id
       })
     })
   }
@@ -36,7 +36,7 @@ export function deleteLane(id) {
 
 export function updateLane(lane) {
   return dispatch => {
-    return callApi(`lanes/${laneId}`, 'put', lane).then(res => {
+    return callApi(`lanes/${lane.id}`, 'put', lane).then(res => {
       dispatch({
         type: UPDATE_LANE,
         lane

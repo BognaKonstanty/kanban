@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class Edit extends Component {
+class Edit extends Component {
   render() {
     const {editing, ...props} = this.props;
 
     return (
-      <div {...props}>
+      <div>
         {editing ? this.renderEdit() : this.renderValue()}
       </div>
     );
@@ -24,16 +24,15 @@ export default class Edit extends Component {
 
     return (
       <div onClick={onValueClick}>
-        <span className={styles.value}>{value}</span>
+        <span>{value}</span>
         {onDelete ? this.renderDelete() : null }
       </div>
     );
   };
 
-  renderDelete = () => {
+  renderDelete = () => {    
     return 
       <button 
-        className={styles.delete} 
         onClick={this.props.onDelete}>×</button>;
   };
 
